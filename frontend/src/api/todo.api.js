@@ -1,11 +1,21 @@
-import axios from "axios";
+import api from "./client";
+import { routes } from "./routes";
 
-const API_URL = import.meta.env.VITE_API_URL;
- 
-export const fetchTodos = () => axios.get(API_URL)
+export const fetchTodos = async () => {
+  const res = await api.get(routes.todos.root);
+  return res.data.data;
+};
 
-export const createTodo = (todo) => axios.post(API_URL, todo);
+export const createTodo = async (todo) => {
+  const res = await api.post(routes.todos.root, todo);
+  return res.data.data;
+};
 
-export const deleteTodo = (id) => axios.delete(`${API_URL}/${id}`);
+export const deleteTodo = async (id) => {
+  await api.delete(routes.todos.byId(id));
+};
 
-export const updateTodo = (id, updatedTodo) => axios.put(`${API_URL}/${id}`, updatedTodo);
+export const updateTodo = async (id, updatedTodo) => {
+  const res = await api.put(routes.todos.byId(id), updatedTodo);
+  return res.data.data;
+};

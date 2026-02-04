@@ -5,7 +5,7 @@ const todoSchema = new mongoose.Schema({
     type: String,
     required: true, // Built-in validator
     trim: true, // Setter option
-    unique: true,      
+    unique: true,
   },
   description: {
     type: String,
@@ -17,13 +17,14 @@ const todoSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
-  completed:{
-    type: Boolean, 
+  completed: {
+    type: Boolean,
     default: false
   },
-  createdAt: {
-    type: Date,
-    default: Date.now // Default value
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   }
 }, { timestamps: true }); // Option to automatically add createdAt and updatedAt fields
 

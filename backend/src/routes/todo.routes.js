@@ -3,9 +3,9 @@ import {getTodos, createTodo, deleteTodo, updateTodo } from "../controllers/todo
 
 const router = express.Router();
 
-router.get("/todo", getTodos);
-router.post("/todo", createTodo);
-router.delete("/todo/:id", deleteTodo);
-router.put("/todo/:id", updateTodo);
+router.get("/", getTodos);
+router.post("/", createTodo);
+router.delete("/:id", deleteTodo);
+router.put("/:id", updateTodo);
 
-export default router
+export default router;

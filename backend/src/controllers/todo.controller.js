@@ -6,7 +6,7 @@ import Todo from "../models/todo.model.js";
 
 export const getTodos = async (req, res) =>{
     try {
-       const todos = await Todo.find().sort({createdAt: -1});
+       const todos = await Todo.find({ user: req.user.id }).sort({completed: 1, createdAt: -1});
        
        res.status(200).json({
         success: true,
@@ -34,7 +34,8 @@ export const createTodo = async (req, res) => {
         const todo = await Todo.create({
             name,
             description,
-            deadline
+            deadline,
+            user: req.user.id,
         });
         res.status(200).json({
             success: true,
