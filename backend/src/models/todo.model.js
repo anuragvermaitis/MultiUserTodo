@@ -5,26 +5,42 @@ const todoSchema = new mongoose.Schema({
     type: String,
     required: true, // Built-in validator
     trim: true, // Setter option
-    unique: true,
   },
   description: {
     type: String,
     required: true,
-    unique: true,   // Ensures unique values (creates a unique index)
-    lowercase: true // Setter
+    trim: true,
   },
   deadline: {
     type: Date,
-    required: true
+    required: false
   },
   completed: {
     type: Boolean,
     default: false
   },
+  archived: {
+    type: Boolean,
+    default: false,
+  },
+  visibility: {
+    type: String,
+    enum: ["private", "workspace"],
+    default: "private",
+  },
+  shared: {
+    type: Boolean,
+    default: false,
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
+  },
+  workspace: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Workspace",
+    default: null,
   }
 }, { timestamps: true }); // Option to automatically add createdAt and updatedAt fields
 

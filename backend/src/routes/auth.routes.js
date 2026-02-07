@@ -1,11 +1,11 @@
 import express from "express";
-import { register, login, logout, getMe } from "../controllers/user.controller.js";
-import { protect } from "../middlewares/auth.middleware.js";
+import { signup, login, getMe } from "../controllers/auth.controller.js";
+import { optionalProtect } from "../middlewares/firebase.middleware.js";
+
 const router = express.Router();
 
-router.post("/register", register);
+router.post("/signup", signup);
 router.post("/login", login);
-router.post("/logout", logout);
-router.get("/me", protect, getMe);
+router.get("/me", optionalProtect, getMe);
 
 export default router;

@@ -6,8 +6,12 @@ import Todo from "../models/todo.model.js";
 
 export const getTodos = async (req, res) =>{
     try {
-       const todos = await Todo.find({ user: req.user.id }).sort({completed: 1, createdAt: -1});
-       
+       const userId = req.user._id;
+
+       const todos = await Todo.find({ user: userId })
+        .populate("user", "name email")
+        .sort({completed: 1, createdAt: -1});
+
        res.status(200).json({
         success: true,
         count: todos.length,
@@ -29,13 +33,18 @@ export const getTodos = async (req, res) =>{
 
 export const createTodo = async (req, res) => {
     try {
-        const { name, description, deadline } = req.body;
+        const { name, description, deadline, shared, visibility } = req.body;
+        const resolvedVisibility = visibility || (shared ? "workspace" : "private");
 
         const todo = await Todo.create({
             name,
             description,
-            deadline,
-            user: req.user.id,
+            deadline: deadline || null,
+            visibility: resolvedVisibility,
+            shared: resolvedVisibility === "workspace",
+            archived: false,
+            user: req.user._id,
+            workspace: req.user.workspace || null,
         });
         res.status(200).json({
             success: true,
@@ -56,14 +65,23 @@ export const createTodo = async (req, res) => {
 export const deleteTodo = async (req, res) => {
     try {
         const { id } = req.params;
-        const deleted = await Todo.findByIdAndDelete(id);
+        const todo = await Todo.findById(id);
 
-        if(!deleted){
-            res.status(404).json({
+        if(!todo){
+            return res.status(404).json({
                 success: false,
                 message: "todo not found"
-            })
+            });
         }
+
+        if (todo.user.toString() !== req.user._id.toString()) {
+            return res.status(403).json({
+                success: false,
+                message: "forbidden"
+            });
+        }
+
+        await Todo.findByIdAndDelete(id);
         res.status(204).send();
     } catch (error) {
         res.status(500).json({
@@ -80,20 +98,41 @@ export const deleteTodo = async (req, res) => {
 export const updateTodo = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, description, deadline, completed } = req.body;
+        const { name, description, deadline, completed, shared, visibility, archived } = req.body;
 
-        const updated = await Todo.findByIdAndUpdate(
-            id,
-            { name, description, deadline, completed },
-            { new: true }
-        );
+        const todo = await Todo.findById(id);
 
-        if(!updated){
-            res.status(404).json({
+        if(!todo){
+            return res.status(404).json({
                 success: false,
                 message: "todo not found"
             });
         }
+
+        if (todo.user.toString() !== req.user._id.toString()) {
+            return res.status(403).json({
+                success: false,
+                message: "forbidden"
+            });
+        }
+
+        const updates = {};
+        if (name !== undefined) updates.name = name;
+        if (description !== undefined) updates.description = description;
+        if (deadline !== undefined) updates.deadline = deadline || null;
+        if (completed !== undefined) updates.completed = completed;
+        if (archived !== undefined) updates.archived = archived;
+        if (visibility !== undefined || shared !== undefined) {
+            const resolvedVisibility = visibility || (shared ? "workspace" : "private");
+            updates.visibility = resolvedVisibility;
+            updates.shared = resolvedVisibility === "workspace";
+        }
+
+        const updated = await Todo.findByIdAndUpdate(
+            id,
+            updates,
+            { new: true, runValidators: true }
+        );
 
         res.status(200).json({
             success: true,

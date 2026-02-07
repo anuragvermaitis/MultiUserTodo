@@ -1,7 +1,229 @@
-@import "tailwindcss";   
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
 
 html,
 body,
 #root {
   height: 100%;
+}
+
+:root {
+  --ink: #0f172a;
+  --muted: #64748b;
+  --panel: #ffffff;
+  --panel-muted: #f8fafc;
+  --accent: #2563eb;
+  --accent-strong: #1d4ed8;
+  --accent-soft: #dbeafe;
+  --success: #16a34a;
+  --warning: #f97316;
+  --danger: #ef4444;
+}
+
+body {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  color: var(--ink);
+  background-color: #eef2ff;
+}
+
+.font-display {
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+}
+
+.app-bg {
+  background:
+    radial-gradient(1000px 500px at -10% -10%, #c7d2fe 0%, transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, #fee2e2 0%, transparent 55%),
+    radial-gradient(900px 600px at 50% 120%, #dbeafe 0%, transparent 60%),
+    linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+}
+
+.card-shell {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(6px);
+}
+
+.nav-link {
+  color: #64748b;
+  font-weight: 600;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #0f172a;
+  background-color: rgba(148, 163, 184, 0.2);
+}
+
+.nav-link-active {
+  color: #0f172a;
+  background-color: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+}
+
+.theme-toggle {
+  width: 40px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(226, 232, 240, 0.7);
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: #0f172a;
+  transform: translateX(0);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.theme-toggle-dot-dark {
+  transform: translateX(16px);
+  background: #e2e8f0;
+}
+
+.btn-ghost {
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  font-weight: 600;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-ghost:hover {
+  background-color: rgba(148, 163, 184, 0.2);
+  color: #0f172a;
+}
+
+.theme-dark {
+  --ink: #e2e8f0;
+  --muted: #94a3b8;
+  --panel: #0f172a;
+  --panel-muted: #111827;
+  --accent: #60a5fa;
+  --accent-strong: #3b82f6;
+  --accent-soft: #1e293b;
+  --success: #22c55e;
+  --warning: #fb923c;
+  --danger: #f87171;
+}
+
+.theme-dark body {
+  background-color: #0b1220;
+  color: var(--ink);
+}
+
+.theme-dark .app-bg {
+  background:
+    radial-gradient(1000px 500px at -10% -10%, #1e1b4b 0%, transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, #111827 0%, transparent 55%),
+    radial-gradient(900px 600px at 50% 120%, #0f172a 0%, transparent 60%),
+    linear-gradient(180deg, #0b1220 0%, #0f172a 100%);
+}
+
+.theme-dark .card-shell {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(51, 65, 85, 0.6);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.theme-dark nav {
+  background-color: rgba(15, 23, 42, 0.8);
+  border-color: rgba(51, 65, 85, 0.6);
+}
+
+.theme-dark .bg-white\/80,
+.theme-dark .bg-white\/70,
+.theme-dark .bg-white\/60,
+.theme-dark .bg-white\/50 {
+  background-color: rgba(15, 23, 42, 0.7) !important;
+}
+
+.theme-dark .bg-slate-50,
+.theme-dark .bg-slate-100 {
+  background-color: rgba(30, 41, 59, 0.7) !important;
+}
+
+.theme-dark .bg-rose-50\/80,
+.theme-dark .bg-rose-50\/70 {
+  background-color: rgba(127, 29, 29, 0.35) !important;
+}
+
+.theme-dark .bg-emerald-50\/80,
+.theme-dark .bg-emerald-50\/70 {
+  background-color: rgba(6, 78, 59, 0.35) !important;
+}
+
+.theme-dark .bg-amber-50\/60,
+.theme-dark .bg-amber-50\/80 {
+  background-color: rgba(120, 53, 15, 0.35) !important;
+}
+
+.theme-dark .bg-rose-50,
+.theme-dark .bg-rose-100,
+.theme-dark .bg-emerald-50,
+.theme-dark .bg-emerald-100 {
+  background-color: rgba(30, 41, 59, 0.8) !important;
+}
+
+.theme-dark .border-slate-200 {
+  border-color: rgba(51, 65, 85, 0.7) !important;
+}
+
+.theme-dark .nav-link {
+  color: #cbd5f5;
+}
+
+.theme-dark .nav-link:hover {
+  color: #e2e8f0;
+  background-color: rgba(59, 130, 246, 0.15);
+}
+
+.theme-dark .nav-link-active {
+  color: #e2e8f0;
+  background-color: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.theme-dark .theme-toggle {
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.theme-dark .btn-ghost:hover {
+  background-color: rgba(56, 189, 248, 0.15);
+  color: #e2e8f0;
+}
+
+.theme-dark .border-rose-200 {
+  border-color: rgba(248, 113, 113, 0.35) !important;
+}
+
+.theme-dark .border-amber-200 {
+  border-color: rgba(251, 191, 36, 0.35) !important;
+}
+
+.theme-dark .text-slate-500,
+.theme-dark .text-slate-600,
+.theme-dark .text-slate-700,
+.theme-dark .text-slate-800,
+.theme-dark .text-slate-900 {
+  color: #e2e8f0 !important;
+}
+
+.theme-dark .text-rose-600,
+.theme-dark .text-rose-700 {
+  color: #fca5a5 !important;
+}
+
+.theme-dark .text-emerald-600,
+.theme-dark .text-emerald-700 {
+  color: #86efac !important;
 }

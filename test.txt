@@ -1,0 +1,1 @@
+nal auth middleware in /srv/projects/mern/todo/backend/src/middlewares/firebase.middleware.js so /auth/me can return 200 with null when no token?

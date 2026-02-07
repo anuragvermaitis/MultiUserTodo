@@ -58,6 +58,7 @@ export const login = async (req, res) => {
         message: "Login successful",
         user: {
             id: user._id,
+            name: user.name,
             email: user.email,
             role: user.role,
         },
@@ -71,10 +72,17 @@ export const logout = (req, res) => {
 };
 
 export const getMe = (req, res) => {
+    if (!req.user) {
+        return res.status(200).json({ user: null });
+    }
+
     res.json({
-        id: req.user.id,
-        role: req.user.role,
+        user: {
+            id: req.user._id,
+            name: req.user.name,
+            email: req.user.email,
+            role: req.user.role,
+            workspace: req.user.workspace,
+        },
     });
 };
-
-

@@ -6,7 +6,7 @@ export const login = async (credentials) => {
   return res.data;
 };
 
-export const register = async (data) => {
-  const res = await api.post(routes.auth.register, data);
+export const signup = async (data) => {
+  const res = await api.post(routes.auth.signup, data);
   return res.data;
 };

@@ -1,27 +1,75 @@
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import api from "../api/client";
+import { getAuthToken, waitForAuthInit } from "../auth/authSession";
 
-const ProtectedRoute = ({ children, requiredRole }) => {
+const ProtectedRoute = ({ children, requiredRole, requiredRoles, requireWorkspace = true }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [hasToken, setHasToken] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    api
-      .get("/auth/me")
-      .then((res) => setUser(res.data))
-      .catch(() => setUser(null))
-      .finally(() => setLoading(false));
+    let isMounted = true;
+
+    const loadUser = async () => {
+      await waitForAuthInit();
+      const token = await getAuthToken();
+      if (!token) {
+        if (isMounted) {
+          setUser(null);
+          setHasToken(false);
+          setLoading(false);
+        }
+        return;
+      }
+      if (isMounted) {
+        setHasToken(true);
+      }
+
+      api
+        .get("/auth/me")
+        .then((res) => {
+          if (isMounted) setUser(res.data.user);
+        })
+        .catch(() => {
+          if (isMounted) setUser(null);
+        })
+        .finally(() => {
+          if (isMounted) setLoading(false);
+        });
+    };
+
+    loadUser();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <div className="rounded-2xl border border-dashed border-slate-200 bg-white/60 p-6 text-sm text-slate-500">
+        Loading your workspace...
+      </div>
+    );
+  }
 
-  if (!user) {
+  if (!hasToken) {
     return <Navigate to="/login" replace />;
   }
 
-  if (requiredRole && user.role !== requiredRole) {
+  if (requireWorkspace && user && !user.workspace) {
+    return <Navigate to="/workspace" replace state={{ from: location.pathname }} />;
+  }
+
+  const roleList = requiredRoles || (requiredRole ? [requiredRole] : null);
+  if (roleList && user && !roleList.includes(user.role)) {
     return <Navigate to="/todos" replace />;
+  }
+
+  if ((requireWorkspace || roleList) && !user) {
+    return <Navigate to="/login" replace />;
   }
 
   return children;
