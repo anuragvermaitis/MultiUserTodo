@@ -6,6 +6,7 @@ import workspaceRoutes from "./routes/workspace.routes.js";
 import { authorize, protect } from "./middlewares/firebase.middleware.js";
 import cookieParser from "cookie-parser";
 import { getUsersWithTodos, removeMember, updateUserRole, upsertMemberNote } from "./controllers/admin.controller.js";
+import mongoose from "mongoose";
 
 const app = express();
 
@@ -21,6 +22,16 @@ app.use(cors(corsOptions));
 app.options(/.*/, cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+
+app.get(["/health", "/api/v1/health"], (req, res) => {
+  const readyState = mongoose.connection.readyState;
+  const isDbReady = readyState === 1;
+  const status = isDbReady ? 200 : 503;
+  res.status(status).json({
+    ok: isDbReady,
+    db: isDbReady ? "connected" : "not_ready",
+  });
+});
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/workspaces", workspaceRoutes);
