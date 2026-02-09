@@ -48,11 +48,7 @@ const ProtectedRoute = ({ children, requiredRole, requiredRoles, requireWorkspac
   }, []);
 
   if (loading) {
-    return (
-      <div className="rounded-2xl border border-dashed border-slate-200 bg-white/60 p-6 text-sm text-slate-500">
-        Loading your workspace...
-      </div>
-    );
+    return null;
   }
 
   if (!hasToken) {

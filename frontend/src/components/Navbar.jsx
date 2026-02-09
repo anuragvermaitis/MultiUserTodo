@@ -97,21 +97,24 @@ const Navbar = () => {
     navigate("/login");
   };
 
+  const isLogin = location.pathname === "/login";
+  const isRegister = location.pathname === "/register";
+
   return (
     <nav className="sticky top-0 z-30 backdrop-blur bg-white/80 border-b border-slate-200/70">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <Link to="/todos" className="flex items-center gap-2">
+          <Link to={isAuthed ? "/todos" : "/login"} className="flex items-center gap-2">
             <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-indigo-500 via-blue-500 to-sky-400 shadow-sm flex items-center justify-center">
               <img src={runnerMark} alt="" className="h-6 w-6" />
             </div>
             <div>
               <div className="font-display text-lg font-semibold leading-tight">TaskPulse</div>
-              <div className="text-xs text-slate-500">Buddy-ready progress tracker</div>
+              <div className="hidden sm:block text-xs text-slate-500">Shared todos, simple.</div>
             </div>
           </Link>
           <a
-            className="inline-flex items-center rounded-full border border-slate-200 px-2 py-1 text-xs font-semibold text-slate-600 hover:border-slate-300 hover:text-slate-900"
+            className="hidden sm:inline-flex items-center rounded-full border border-slate-200 px-2 py-1 text-xs font-semibold text-slate-600 hover:border-slate-300 hover:text-slate-900"
             href="https://github.com/anuragvermaitis/MultiUserTodo"
             target="_blank"
             rel="noreferrer"
@@ -127,7 +130,7 @@ const Navbar = () => {
           </a>
         </div>
 
-        <div className="flex items-center gap-3 text-sm">
+        <div className="flex flex-wrap items-center gap-2 text-sm">
           <button
             onClick={toggleTheme}
             className="theme-toggle"
@@ -137,12 +140,14 @@ const Navbar = () => {
           >
             <span className={`theme-toggle-dot ${theme === "dark" ? "theme-toggle-dot-dark" : ""}`} />
           </button>
-          <Link
-            className={`nav-link ${location.pathname === "/todos" ? "nav-link-active" : ""}`}
-            to="/todos"
-          >
-            Todos
-          </Link>
+          {isAuthed && (
+            <Link
+              className={`nav-link ${location.pathname === "/todos" ? "nav-link-active" : ""}`}
+              to="/todos"
+            >
+              Todos
+            </Link>
+          )}
 
           {isAuthed && (
             <Link
@@ -173,10 +178,13 @@ const Navbar = () => {
 
           {!isAuthed ? (
             <>
-              <Link className="text-slate-600 hover:text-slate-900" to="/login">
+              <Link className={`btn-outline ${isLogin ? "btn-outline-active" : ""}`} to="/login">
                 Login
               </Link>
-              <Link className="inline-flex items-center rounded-full bg-slate-900 text-white px-3 py-1 text-xs font-semibold hover:bg-slate-800" to="/register">
+              <Link
+                className={`btn-solid ${isRegister ? "btn-solid-active" : ""}`}
+                to="/register"
+              >
                 Create account
               </Link>
             </>

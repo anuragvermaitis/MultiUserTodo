@@ -220,45 +220,43 @@ const TodoPage = () => {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+    <div className="space-y-6">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <p className="text-sm uppercase tracking-[0.2em] text-slate-500">Workspace</p>
-          <h1 className="font-display text-3xl font-semibold">Your Buddy Progress Board</h1>
-          <p className="mt-2 text-sm text-slate-600">
-            Track personal work and shared tasks so buddies can see each other’s progress.
-          </p>
+          <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Workspace</p>
+          <h1 className="font-display text-3xl font-semibold">Your tasks</h1>
+          <p className="mt-1 text-sm text-slate-600">Personal and shared work in one place.</p>
         </div>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <div className="rounded-2xl bg-white/80 p-4 shadow-sm">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
+          <div className="rounded-2xl bg-white/80 p-3 shadow-sm">
             <p className="text-xs uppercase text-slate-500">Total</p>
-            <p className="font-display text-2xl font-semibold">{total}</p>
+            <p className="font-display text-xl font-semibold">{total}</p>
           </div>
-          <div className="rounded-2xl bg-white/80 p-4 shadow-sm">
+          <div className="rounded-2xl bg-white/80 p-3 shadow-sm">
             <p className="text-xs uppercase text-slate-500">Active</p>
-            <p className="font-display text-2xl font-semibold">{activeCount}</p>
+            <p className="font-display text-xl font-semibold">{activeCount}</p>
           </div>
-          <div className="rounded-2xl bg-white/80 p-4 shadow-sm">
+          <div className="rounded-2xl bg-white/80 p-3 shadow-sm">
             <p className="text-xs uppercase text-slate-500">Completed</p>
-            <p className="font-display text-2xl font-semibold text-emerald-600">{completedCount}</p>
+            <p className="font-display text-xl font-semibold text-emerald-600">{completedCount}</p>
           </div>
-          <div className="rounded-2xl bg-white/80 p-4 shadow-sm">
+          <div className="rounded-2xl bg-white/80 p-3 shadow-sm">
             <p className="text-xs uppercase text-slate-500">Archived</p>
-            <p className="font-display text-2xl font-semibold text-slate-600">{archivedCount}</p>
+            <p className="font-display text-xl font-semibold text-slate-600">{archivedCount}</p>
           </div>
         </div>
       </div>
 
-      <div className="card-shell rounded-3xl p-6">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <div className="card-shell rounded-3xl p-5">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <h2 className="font-display text-xl font-semibold">Add a new task</h2>
-            <p className="text-sm text-slate-500">Keep tasks crisp so your buddies can follow the flow.</p>
+            <p className="text-sm text-slate-500">A short title helps a lot.</p>
           </div>
           <div className="flex flex-wrap gap-2 text-xs text-slate-500" />
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-6 grid gap-3 md:grid-cols-6">
+        <form onSubmit={handleSubmit} className="mt-5 grid gap-3 md:grid-cols-6">
           <div className="md:col-span-2">
             <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">Task</label>
             <input
@@ -272,7 +270,7 @@ const TodoPage = () => {
             <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">Description</label>
             <input
               className="mt-2 w-full rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
-              placeholder="Prep weekly sync notes for the crew"
+              placeholder="Prep weekly sync notes"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
@@ -312,11 +310,11 @@ const TodoPage = () => {
         </form>
       </div>
 
-      <div className="card-shell rounded-3xl p-6">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <div className="card-shell rounded-3xl p-5">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <h2 className="font-display text-xl font-semibold">Task list</h2>
-            <p className="text-sm text-slate-500">Filter, archive, and keep your buddy crew in sync.</p>
+            <p className="text-sm text-slate-500">Filter and sort as needed.</p>
           </div>
           <div className="flex flex-wrap gap-2">
             {filters.map((item) => (

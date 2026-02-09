@@ -161,19 +161,17 @@ const WorkspacePage = () => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div>
-        <p className="text-sm uppercase tracking-[0.2em] text-slate-500">Workspace</p>
-        <h1 className="font-display text-3xl font-semibold">Set up your buddy space</h1>
-        <p className="mt-2 text-sm text-slate-600">
-          Built for buddy progress sharing—create a space or join with an invite code.
-        </p>
+        <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Workspace</p>
+        <h1 className="font-display text-3xl font-semibold">Workspace</h1>
+        <p className="mt-1 text-sm text-slate-600">Create one or join with an invite code.</p>
       </div>
 
       {workspace ? (
-        <div className="card-shell rounded-3xl p-6">
+        <div className="card-shell rounded-3xl p-5">
           <h2 className="font-display text-xl font-semibold">{workspace.name}</h2>
-          <p className="mt-1 text-sm text-slate-500">Invite friends to join with this code.</p>
+          <p className="mt-1 text-sm text-slate-500">Share this code to invite others.</p>
 
           <div className="mt-4 flex flex-wrap items-center gap-3">
             <div className="rounded-2xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white">
@@ -273,11 +271,11 @@ const WorkspacePage = () => {
           )}
         </div>
       ) : (
-        <div className="grid gap-6 lg:grid-cols-2">
-          <form onSubmit={handleCreate} className="card-shell rounded-3xl p-6 space-y-4">
+        <div className="grid gap-5 lg:grid-cols-2">
+          <form onSubmit={handleCreate} className="card-shell rounded-3xl p-5 space-y-3">
             <div>
               <h2 className="font-display text-xl font-semibold">Create a workspace</h2>
-              <p className="text-sm text-slate-500">Become the admin and invite your buddies.</p>
+              <p className="text-sm text-slate-500">You become the admin.</p>
             </div>
             <div>
               <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">Workspace name</label>
@@ -297,10 +295,10 @@ const WorkspacePage = () => {
             </button>
           </form>
 
-          <form onSubmit={handleJoin} className="card-shell rounded-3xl p-6 space-y-4">
+          <form onSubmit={handleJoin} className="card-shell rounded-3xl p-5 space-y-3">
             <div>
               <h2 className="font-display text-xl font-semibold">Join a workspace</h2>
-              <p className="text-sm text-slate-500">Use the invite code from a buddy.</p>
+              <p className="text-sm text-slate-500">Paste an invite code.</p>
             </div>
             <div>
               <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">Invite code</label>

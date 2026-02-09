@@ -71,27 +71,25 @@ const AdminPage = () => {
   const canRemove = currentUser && ["admin", "manager"].includes(currentUser.role);
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+    <div className="space-y-6">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <p className="text-sm uppercase tracking-[0.2em] text-slate-500">Admin Control</p>
-          <h1 className="font-display text-3xl font-semibold">Buddy crew controls</h1>
-          <p className="mt-2 text-sm text-slate-600">
-            Keep roles tidy, track shared workload, and help your crew stay aligned.
-          </p>
+          <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Admin</p>
+          <h1 className="font-display text-3xl font-semibold">Team controls</h1>
+          <p className="mt-1 text-sm text-slate-600">Manage roles and access.</p>
         </div>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          <div className="rounded-2xl bg-white/80 p-4 shadow-sm">
+        <div className="grid grid-cols-3 gap-2 sm:gap-3">
+          <div className="rounded-2xl bg-white/80 p-3 shadow-sm">
             <p className="text-xs uppercase text-slate-500">Users</p>
-            <p className="font-display text-2xl font-semibold">{users.length}</p>
+            <p className="font-display text-xl font-semibold">{users.length}</p>
           </div>
-          <div className="rounded-2xl bg-white/80 p-4 shadow-sm">
+          <div className="rounded-2xl bg-white/80 p-3 shadow-sm">
             <p className="text-xs uppercase text-slate-500">Tasks</p>
-            <p className="font-display text-2xl font-semibold">{totalTodos}</p>
+            <p className="font-display text-xl font-semibold">{totalTodos}</p>
           </div>
-          <div className="rounded-2xl bg-white/80 p-4 shadow-sm">
-            <p className="text-xs uppercase text-slate-500">Leads</p>
-            <p className="font-display text-2xl font-semibold text-indigo-600">
+          <div className="rounded-2xl bg-white/80 p-3 shadow-sm">
+            <p className="text-xs uppercase text-slate-500">Managers</p>
+            <p className="font-display text-xl font-semibold text-indigo-600">
               {users.filter((user) => user.role === "manager").length}
             </p>
           </div>
@@ -101,8 +99,8 @@ const AdminPage = () => {
       <div className="card-shell rounded-3xl p-6">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
-            <h2 className="font-display text-xl font-semibold">User roster</h2>
-            <p className="text-sm text-slate-500">Adjust access and review buddy workloads.</p>
+            <h2 className="font-display text-xl font-semibold">Users</h2>
+            <p className="text-sm text-slate-500">Update roles and remove access.</p>
           </div>
           <input
             className="w-full md:max-w-xs rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"

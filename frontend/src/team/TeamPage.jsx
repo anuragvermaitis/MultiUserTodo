@@ -92,36 +92,34 @@ const TeamPage = () => {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+    <div className="space-y-6">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <p className="text-sm uppercase tracking-[0.2em] text-slate-500">Team Overview</p>
-          <h1 className="font-display text-3xl font-semibold">Buddy board snapshot</h1>
-          <p className="mt-2 text-sm text-slate-600">
-            See each other’s todos and keep the momentum shared.
-          </p>
+          <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Team</p>
+          <h1 className="font-display text-3xl font-semibold">Team snapshot</h1>
+          <p className="mt-1 text-sm text-slate-600">See what everyone is working on.</p>
         </div>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          <div className="rounded-2xl bg-white/80 p-4 shadow-sm">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
+          <div className="rounded-2xl bg-white/80 p-3 shadow-sm">
             <p className="text-xs uppercase text-slate-500">Users</p>
-            <p className="font-display text-2xl font-semibold">{totalUsers}</p>
+            <p className="font-display text-xl font-semibold">{totalUsers}</p>
           </div>
-          <div className="rounded-2xl bg-white/80 p-4 shadow-sm">
+          <div className="rounded-2xl bg-white/80 p-3 shadow-sm">
             <p className="text-xs uppercase text-slate-500">Tasks</p>
-            <p className="font-display text-2xl font-semibold">{totalTodos}</p>
+            <p className="font-display text-xl font-semibold">{totalTodos}</p>
           </div>
-          <div className="rounded-2xl bg-white/80 p-4 shadow-sm">
+          <div className="rounded-2xl bg-white/80 p-3 shadow-sm">
             <p className="text-xs uppercase text-slate-500">Completed</p>
-            <p className="font-display text-2xl font-semibold text-emerald-600">{completed}</p>
+            <p className="font-display text-xl font-semibold text-emerald-600">{completed}</p>
           </div>
         </div>
       </div>
 
-      <div className="card-shell rounded-3xl p-6">
+      <div className="card-shell rounded-3xl p-5">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="font-display text-xl font-semibold">Team radar</h2>
-            <p className="text-sm text-slate-500">Spot where your buddies are focused.</p>
+            <p className="text-sm text-slate-500">Quick view of each person.</p>
           </div>
           <input
             className="w-full md:max-w-xs rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
@@ -252,7 +250,7 @@ const TeamPage = () => {
                       <textarea
                         className="w-full rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
                         rows={3}
-                        placeholder="Add a quick buddy note"
+                        placeholder="Add a quick note"
                         value={noteDrafts[user._id] || ""}
                         onChange={(e) =>
                           setNoteDrafts((prev) => ({ ...prev, [user._id]: e.target.value }))

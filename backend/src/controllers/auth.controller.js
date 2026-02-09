@@ -22,15 +22,23 @@ export const signup = async (req, res) => {
       displayName: name || email.split("@")[0],
     });
 
-    const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
-    const actionCodeSettings = { url: frontendUrl, handleCodeInApp: false };
-    const verificationLink = await admin.auth().generateEmailVerificationLink(email, actionCodeSettings);
+    let verificationLink = null;
+    if (process.env.NODE_ENV !== "production" && process.env.EXPOSE_VERIFICATION_LINK === "true") {
+      const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
+      const actionCodeSettings = { url: frontendUrl, handleCodeInApp: false };
+      verificationLink = await admin.auth().generateEmailVerificationLink(email, actionCodeSettings);
+    }
 
-    return res.status(201).json({
+    const response = {
       message: "Signup successful. Verify your email to activate your account.",
-      verificationLink,
       firebaseUid: userRecord.uid,
-    });
+    };
+
+    if (verificationLink) {
+      response.verificationLink = verificationLink;
+    }
+
+    return res.status(201).json(response);
   } catch (err) {
     return res.status(400).json({ message: err.message || "Signup failed" });
   }

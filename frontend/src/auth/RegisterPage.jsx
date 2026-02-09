@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import api from "../api/client";
 import { auth, googleProvider } from "./firebase";
+import { clearToken } from "./authSession";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -11,12 +12,11 @@ const RegisterPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [verificationSent, setVerificationSent] = useState(false);
-  const [verificationLink, setVerificationLink] = useState("");
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Registration is handled by the backend; no automatic login.
+    // Registration is handled by Firebase; no automatic login.
   }, [navigate]);
 
   const handleSubmit = async (e) => {
@@ -25,16 +25,16 @@ const RegisterPage = () => {
 
     try {
       setLoading(true);
-      const res = await api.post("/auth/signup", {
-        name: name.trim(),
-        email: email.trim(),
-        password,
-      });
+      const credential = await createUserWithEmailAndPassword(auth, email.trim(), password);
+      if (name.trim()) {
+        await updateProfile(credential.user, { displayName: name.trim() });
+      }
+      await sendEmailVerification(credential.user);
+      await signOut(auth);
       setVerificationSent(true);
-      setVerificationLink(res.data?.verificationLink || "");
       setError("");
     } catch (err) {
-      setError(err.message || "Registration failed");
+      setError(err.response?.data?.message || err.message || "Registration failed");
     } finally {
       setLoading(false);
     }
@@ -46,10 +46,16 @@ const RegisterPage = () => {
       setLoading(true);
       const credential = await signInWithPopup(auth, googleProvider);
       const token = await credential.user.getIdToken(true);
-      await api.post("/auth/login", { token });
+      try {
+        await api.post("/auth/login", { token });
+      } catch (apiErr) {
+        clearToken();
+        await signOut(auth);
+        throw apiErr;
+      }
       navigate("/todos");
     } catch (err) {
-      setError(err.message || "Google sign-up failed");
+      setError(err.response?.data?.message || err.message || "Google sign-up failed");
     } finally {
       setLoading(false);
     }
@@ -58,26 +64,21 @@ const RegisterPage = () => {
   return (
     <div className="min-h-[70vh] flex items-center justify-center py-12 px-4">
       <div className="w-full max-w-md card-shell rounded-2xl p-8">
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex items-center gap-3 mb-4">
           <div className="h-12 w-12 rounded-2xl bg-linear-to-br from-emerald-400 via-teal-400 to-sky-400" />
           <div>
             <h2 className="font-display text-2xl font-semibold">Create account</h2>
-            <p className="text-sm text-slate-500">Start sharing progress with your buddies today.</p>
+            <p className="text-sm text-slate-500">Set up your account.</p>
           </div>
         </div>
 
         {verificationSent && (
           <div className="mb-4 rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-700">
             Verification email sent. Please verify and then login.
-            {verificationLink && (
-              <div className="mt-2 text-xs text-emerald-800 break-all">
-                Verification link: {verificationLink}
-              </div>
-            )}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3">
           <div>
             <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">Name</label>
             <input
