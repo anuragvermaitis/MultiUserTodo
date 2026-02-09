@@ -109,7 +109,7 @@ const Navbar = () => {
               <img src={runnerMark} alt="" className="h-6 w-6" />
             </div>
             <div>
-              <div className="font-display text-lg font-semibold leading-tight">TaskPulse</div>
+              <div className="font-display text-lg font-semibold leading-tight">TaskLedger</div>
               <div className="hidden sm:block text-xs text-slate-500">Shared todos, simple.</div>
             </div>
           </Link>

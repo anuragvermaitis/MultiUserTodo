@@ -261,7 +261,7 @@ const TodoPage = () => {
             <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">Task</label>
             <input
               className="mt-2 w-full rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
-              placeholder="Fix flaky test #42"
+              placeholder="Deploy it, ship it, share on X + LinkedIn"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
