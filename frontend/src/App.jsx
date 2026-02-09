@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 
 import TodoPage from "./todos/TodoPage";
 import LoginPage from "./auth/LoginPage";
@@ -88,6 +89,7 @@ function App() {
           </Routes>
           <Footer />
         </main>
+        <Analytics />
       </div>
     </BrowserRouter>
   );

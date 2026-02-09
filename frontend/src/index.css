@@ -143,6 +143,18 @@ body {
   box-shadow: 0 10px 22px rgba(15, 23, 42, 0.28);
 }
 
+.btn-google {
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  color: #0f172a;
+  background: #ffffff;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-google:hover {
+  border-color: rgba(59, 130, 246, 0.6);
+  background: rgba(59, 130, 246, 0.08);
+}
+
 .theme-dark {
   --ink: #e2e8f0;
   --muted: #94a3b8;
@@ -207,6 +219,14 @@ body {
   background-color: rgba(120, 53, 15, 0.35) !important;
 }
 
+.theme-dark .bg-amber-50 {
+  background-color: rgba(120, 53, 15, 0.4) !important;
+}
+
+.theme-dark .text-amber-600 {
+  color: #fbbf24 !important;
+}
+
 .theme-dark .bg-rose-50,
 .theme-dark .bg-rose-100,
 .theme-dark .bg-emerald-50,
@@ -260,12 +280,23 @@ body {
 }
 
 .theme-dark .btn-solid {
-  background: #1e40af;
-  box-shadow: 0 8px 18px rgba(30, 64, 175, 0.35);
+  background: #059669;
+  box-shadow: 0 8px 18px rgba(5, 150, 105, 0.35);
 }
 
 .theme-dark .btn-solid:hover {
-  background: #1d4ed8;
+  background: #10b981;
+}
+
+.theme-dark .btn-google {
+  border-color: rgba(56, 189, 248, 0.35);
+  background: rgba(15, 23, 42, 0.8);
+  color: #e2e8f0;
+}
+
+.theme-dark .btn-google:hover {
+  border-color: rgba(56, 189, 248, 0.55);
+  background: rgba(56, 189, 248, 0.12);
 }
 
 .theme-dark .border-rose-200 {

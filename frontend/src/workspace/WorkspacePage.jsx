@@ -279,12 +279,12 @@ const WorkspacePage = () => {
             </div>
             <div>
               <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">Workspace name</label>
-              <input
-                className="mt-2 w-full rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                placeholder="Study Squad"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
+                <input
+                  className="mt-2 w-full rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                  placeholder="Refactor Rangers"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
             </div>
             <button
               className="w-full rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-60"
@@ -302,12 +302,12 @@ const WorkspacePage = () => {
             </div>
             <div>
               <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">Invite code</label>
-              <input
-                className="mt-2 w-full rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                placeholder="AB12CD"
-                value={code}
-                onChange={(e) => setCode(e.target.value.toUpperCase())}
-              />
+                <input
+                  className="mt-2 w-full rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                  placeholder="C0D3PLS"
+                  value={code}
+                  onChange={(e) => setCode(e.target.value.toUpperCase())}
+                />
             </div>
             <button
               className="w-full rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-500 disabled:opacity-60"

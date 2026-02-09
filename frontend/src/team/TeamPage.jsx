@@ -123,7 +123,7 @@ const TeamPage = () => {
           </div>
           <input
             className="w-full md:max-w-xs rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
-            placeholder="Search by name, email, role"
+            placeholder="grep the roster"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -250,7 +250,7 @@ const TeamPage = () => {
                       <textarea
                         className="w-full rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
                         rows={3}
-                        placeholder="Add a quick note"
+                        placeholder="Quick note: ships on Friday"
                         value={noteDrafts[user._id] || ""}
                         onChange={(e) =>
                           setNoteDrafts((prev) => ({ ...prev, [user._id]: e.target.value }))

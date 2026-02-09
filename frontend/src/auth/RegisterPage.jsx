@@ -83,7 +83,7 @@ const RegisterPage = () => {
             <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">Name</label>
             <input
               className="mt-2 w-full rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-200"
-              placeholder="Alex Morgan"
+              placeholder="Ada Lovelace"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -93,7 +93,7 @@ const RegisterPage = () => {
             <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">Email</label>
             <input
               className="mt-2 w-full rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-200"
-              placeholder="alex@company.com"
+              placeholder="ada@compile.dev"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -104,7 +104,7 @@ const RegisterPage = () => {
             <input
               className="mt-2 w-full rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-200"
               type="password"
-              placeholder="Create a strong password"
+              placeholder="shipit1234"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -128,7 +128,7 @@ const RegisterPage = () => {
         <button
           type="button"
           onClick={handleGoogle}
-          className="w-full rounded-xl border border-slate-200 bg-white py-2 text-sm font-semibold text-slate-700 hover:border-slate-300 disabled:opacity-60"
+          className="btn-google w-full rounded-xl py-2 text-sm font-semibold disabled:opacity-60"
           disabled={loading}
         >
           Continue with Google

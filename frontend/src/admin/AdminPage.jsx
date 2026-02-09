@@ -104,7 +104,7 @@ const AdminPage = () => {
           </div>
           <input
             className="w-full md:max-w-xs rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
-            placeholder="Search by name, email, role"
+            placeholder="find by name/email/role"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />

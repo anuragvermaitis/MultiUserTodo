@@ -261,7 +261,7 @@ const TodoPage = () => {
             <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">Task</label>
             <input
               className="mt-2 w-full rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
-              placeholder="Sprint retro notes"
+              placeholder="Fix flaky test #42"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -270,7 +270,7 @@ const TodoPage = () => {
             <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">Description</label>
             <input
               className="mt-2 w-full rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
-              placeholder="Prep weekly sync notes"
+              placeholder="Reduce bundle size, 1 mystery at a time"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
@@ -336,7 +336,7 @@ const TodoPage = () => {
         <div className="mt-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <input
             className="w-full md:max-w-sm rounded-xl border border-slate-200 bg-white/70 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
-            placeholder="Search tasks"
+            placeholder="Search tasks or bugs"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
